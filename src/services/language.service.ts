@@ -67,9 +67,42 @@ export class LanguageService extends LanguageHelpers{
         }else{
             res.status(200).json({successed:false});
         } 
-        
-      
+    }
 
+    public async deleteOne(req:Request, res:Response){
+        Language.findByIdAndDelete(req.params.id,(err:Error)=>{
+            if(err){
+                res.status(401).json({successed:false, message:"server got an error, contact support if this error is still happening"});
+            }else{
+                res.status(200).json({successed:true,message:"Language deleted successfully"});
+            }
+        });
+    }
+
+    public async getOne(req:Request, res:Response){
+        const lan:any = await super.GetLanguage({_id:req.params.id});
+        res.status(200).json(lan[0]);
+    }
+
+    public async updateOne(req:Request, res:Response){       
+        const old_lan:any = await super.GetLanguage({
+            name:req.body.name,
+            _id: { $nin: [req.params.id] }
+        });
+
+        if( old_lan.length === 0 ){
+
+            Language.findByIdAndUpdate(req.params.id,req.body,(err:Error)=>{
+                if(err){
+                    res.status(401).json({successed:false, message:"server got an error, contact support if this error is still happening"});
+                }else{
+                    res.status(200).json({successed:true,message:"Language updated successfully"});
+                }
+            });
+
+        }else{
+            res.status(200).json({successed:false});
+        } 
     }
 
 }

@@ -8,9 +8,15 @@ export class LanguageController{
         this.routes();
     }
     private routes(){
+            
         this.app.route("/languages").get(this.Language_service.getAll);
 
         this.app.route("/language").post(this.Language_service.NewOne);
+
+        this.app.route("/language/:id")
+        .delete(this.Language_service.deleteOne)
+        .get(this.Language_service.getOne)
+        .put(this.Language_service.updateOne);
         
     }
 }
