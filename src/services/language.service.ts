@@ -24,12 +24,6 @@ class LanguageHelpers{
 
 export class LanguageService extends LanguageHelpers{
     
-    private category_service: CategoryService;
-    constructor(){
-        super();
-        this.category_service = new CategoryService();        
-    }
-
     public getAll(req:Request, res:Response){
         Language.aggregate([
             {
