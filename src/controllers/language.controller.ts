@@ -11,6 +11,8 @@ export class LanguageController{
             
         this.app.route("/languages").get(this.Language_service.getAll);
 
+        this.app.route("/languages/category/:id").get(this.Language_service.getByCategory);
+
         this.app.route("/language").post(this.Language_service.NewOne);
 
         this.app.route("/language/:id")

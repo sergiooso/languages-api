@@ -29,10 +29,16 @@ export class CategoryService extends CategoryHelpers{
             if(err){
                 res.status(401).send(err);
             }else{
+                res.cookie("val","uayeb");
                 res.status(200).json(categories);
             }
             
         });
+    }
+
+    public async getOne(req:Request, res:Response){
+        const cat:any = await super.GetCategory({_id:req.params.id});
+        res.status(200).json(cat);
     }
 
     public getAllWLanguage(req:Request, res:Response){
@@ -89,7 +95,6 @@ export class CategoryService extends CategoryHelpers{
             });
 
         }
-
     }
 
 }

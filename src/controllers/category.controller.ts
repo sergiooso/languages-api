@@ -10,7 +10,9 @@ export class CategoryController{
     private routes(){
         this.app.route("/categories").get(this.category_service.getAll);
         this.app.route("/categories/languages").get(this.category_service.getAllWLanguage);
-        this.app.route("/category/:id").delete(this.category_service.deleteOne);
+        this.app.route("/category/:id")
+        .delete(this.category_service.deleteOne)
+        .get(this.category_service.getOne);
         this.app.route("/category").post(this.category_service.NewOne);
         
     }

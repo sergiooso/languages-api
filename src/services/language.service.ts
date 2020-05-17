@@ -99,4 +99,9 @@ export class LanguageService extends LanguageHelpers{
         } 
     }
 
+    public async getByCategory(req:Request, res:Response){
+        const lan:any = await super.GetLanguage({category:req.params.id});
+        res.status(200).json(lan);
+    }
+
 }
